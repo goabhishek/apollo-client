@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { USER_LOGIN } from '../apollo/mutation';
+import { useNavigate } from 'react-router-dom';
 
 const LoginUser = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -29,6 +32,7 @@ const LoginUser = () => {
       if (userLogin?.status === 200) {
         console.log(userLogin.message);
         alert(userLogin.message);
+        navigate('/Profile');
       }
     },
   });
